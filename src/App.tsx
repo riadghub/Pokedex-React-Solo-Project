@@ -1,48 +1,63 @@
-import React, { useEffect, useState } from 'react';
-import PokemonCollection from './components/PokemonCollection';
-import { Pokemon } from "../interface"
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import logo from './logo.svg';
-
-import './App.css';
+import "./App.css";
+import PokemonCollection from "./components/PokemonCollection";
+import { Pokemon } from "./interface";
 
 interface Pokemons {
-  name : string
-  url : string
+  name: string;
+  url: string;
 }
 
-function App() {
-
-  const [pokemons, setPokemons] = useState<Pokemon[]>([])
-
-// appel de l'API lorsque la page est chargée
+const App: React.FC = () => {
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [nextUrl, setNextUrl] = useState<string>("");
 
   useEffect(() => {
-
     const getPokemon = async () => {
-      const res = await axios.get(
-        "https://pokeapi.co/api/v2/pokemon?limit=20&offset=20"
-        )
-        res.data.results.forEach(async (pokemon : Pokemons) => {
-          const poke = await axios.get(
-            `https://pokeapi.co/api/v2/pokemon${pokemon.name}`
-            )
+      const res = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=20");
 
-            setPokemons((p) => [...p, poke.data])
+      setNextUrl(res.data.next);
+
+      const newPokemonsData = await Promise.all(
+        res.data.results.map(async (pokemon: Pokemons) => {
+          const poke = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`);
+          return poke.data;
         })
-    }
-    getPokemon()
+      );
 
-  }, [])
+      setPokemons(newPokemonsData);
+    };
 
-  // notre affichage 
+    getPokemon();
+  }, []);
+
+  const nextPage = async () => {
+    let res = await axios.get(nextUrl);
+
+    setNextUrl(res.data.next);
+
+    const newPokemonsData = await Promise.all(
+      res.data.results.map(async (pokemon: Pokemons) => {
+        const poke = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`);
+        return poke.data;
+      })
+    );
+
+    setPokemons((prevPokemons) => [...prevPokemons, ...newPokemonsData]);
+  };
 
   return (
     <div className="App">
-      <header className="pokemon-header">Pokemon</header>
-      <PokemonCollection pokemons={pokemons}/>
+      <div className="container">
+        <header className="pokemon-header"> <span>My</span>Pokedex</header>
+        <PokemonCollection pokemons={pokemons} />
+        <button onClick={nextPage}>Charger</button>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
+
+// Made by Riad
