@@ -6,6 +6,11 @@
   margin: 0;
 }
 
+@font-face {
+  font-family: 'Press Start 2P';
+  src: url('./fonts/Press_Start_2P/PressStart2P-Regular.ttf') format('truetype');
+}
+
 body {
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
@@ -13,7 +18,7 @@ body {
   overflow-y:visible;
   overflow-x: hidden;
   font-size: 1.15rem;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Press Start 2P';
   background-color: #3d405b;
 }
 
@@ -39,5 +44,8 @@ body {
   font-size: 2.5rem;
   letter-spacing: 0.25rem;
   font-weight: 600;
-  color: white;
+  color: black;
+}
+.pokemon-header span {
+  color: red
 }
