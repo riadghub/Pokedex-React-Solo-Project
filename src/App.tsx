@@ -12,6 +12,7 @@ interface Pokemons {
 const App: React.FC = () => {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [nextUrl, setNextUrl] = useState<string>("");
+  const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
 
   useEffect(() => {
     const getPokemon = async () => {
