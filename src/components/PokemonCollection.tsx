@@ -12,11 +12,14 @@ const PokemonColection: React.FC<Props> = (props) => {
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
   const [showShiny, setShowShiny] = useState(false);
   const [selectedGender, setSelectedGender] = useState<"male" | "female" | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
   const handlePokemonClick = (pokemon: Pokemon) => {
     setSelectedPokemon(pokemon);
     setShowShiny(false);
     setSelectedGender(null);
+    setIsDropdownVisible(false);
   };
 
   const handleCloseDetails = (event: React.MouseEvent) => {
@@ -33,8 +36,48 @@ const PokemonColection: React.FC<Props> = (props) => {
     setSelectedGender(gender);
   };
 
+  const handleSearchInput = (event: React.FormEvent<HTMLInputElement>) => {
+    const newSearchTerm = event.currentTarget.value;
+    setSearchTerm(newSearchTerm);
+    setIsDropdownVisible(newSearchTerm !== "" && filteredPokemons.length > 0);
+    setSelectedPokemon(null);
+    setShowShiny(false);
+    setSelectedGender(null);
+  };
+
+  const filteredPokemons = pokemons.filter((pokemon) =>
+    pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <>
+    <div className="search-bar">
+        <input
+          id="textbar"
+          type="text"
+          placeholder="Nom du Pokémon..."
+          value={searchTerm}
+          onInput={handleSearchInput}
+        />
+        {isDropdownVisible && (
+          <div className="dropdown">
+            {filteredPokemons.slice(0, 6).map((pokemon) => (
+              <div
+                key={pokemon.id}
+                className="dropdown-item"
+                onClick={() => handlePokemonClick(pokemon)}
+              >
+                <img
+                  src={pokemon.sprites.front_default}
+                  alt={pokemon.name}
+                  className="pokemon-icon"
+                />
+                {pokemon.name}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
       <section className="collection-container">
         {pokemons.map((pokemon) => {
           return (
