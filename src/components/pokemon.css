@@ -126,7 +126,7 @@
 .dropdown {
   position: absolute;
   z-index: 1;
-  max-height: 140px; /* Limite la hauteur pour n'afficher que 6 éléments */
+  max-height: 140px; /* Limite la hauteur pour n'afficher seulement 6 éléments */
   overflow-y: auto; /* ajoute le scroll si besoin */
   background-color: white;
   border: 1px solid #ccc;
