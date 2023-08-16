@@ -122,11 +122,12 @@
   text-align: center; 
 }
 
-/* Styles pour le menu déroulant */
+/* Styles pour le menu deroulant */
+
 .dropdown {
   position: absolute;
   z-index: 1;
-  max-height: 140px; /* Limite la hauteur pour n'afficher seulement 6 éléments */
+  max-height: 140px; /* Limite la hauteur pour n'afficher seulement 6 elements */
   overflow-y: auto; /* ajoute le scroll si besoin */
   background-color: white;
   border: 1px solid #ccc;

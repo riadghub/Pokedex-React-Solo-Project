@@ -24,6 +24,7 @@ function PokemonList(props: Props) {
       </section>
     </div>
   )
+  
 }
 
 export default PokemonList
