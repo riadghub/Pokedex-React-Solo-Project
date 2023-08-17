@@ -5,6 +5,7 @@ interface Props {
   id: number
   image: string
   type: string
+  
 }
 
 function capitalizeFirstLetter(str: string): string {
