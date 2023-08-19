@@ -93,8 +93,8 @@ const PokemonColection: React.FC<Props> = (props) => {
                 image={
                   showShiny && selectedPokemon === pokemon
                     ? selectedGender === "female"
-                      ? pokemon.sprites.front_shiny_female || pokemon.sprites.front_shiny
-                      : pokemon.sprites.front_shiny
+                    ? pokemon.sprites.front_shiny_female || pokemon.sprites.front_shiny
+                    : pokemon.sprites.front_shiny
                     : selectedGender === "female"
                     ? pokemon.sprites.front_female || pokemon.sprites.front_default
                     : pokemon.sprites.front_default
@@ -112,8 +112,8 @@ const PokemonColection: React.FC<Props> = (props) => {
               src={
                 showShiny
                   ? selectedGender === "female"
-                    ? selectedPokemon.sprites.front_shiny_female || selectedPokemon.sprites.front_shiny
-                    : selectedPokemon.sprites.front_shiny
+                  ? selectedPokemon.sprites.front_shiny_female || selectedPokemon.sprites.front_shiny
+                  : selectedPokemon.sprites.front_shiny
                   : selectedGender === "female"
                   ? selectedPokemon.sprites.front_female || selectedPokemon.sprites.front_default
                   : selectedPokemon.sprites.front_default
