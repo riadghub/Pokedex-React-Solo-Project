@@ -26,7 +26,6 @@ const App: React.FC = () => {
           return poke.data;
         })
       );
-
       setPokemons(newPokemonsData);
     };
 
@@ -44,7 +43,6 @@ const App: React.FC = () => {
         return poke.data;
       })
     );
-
     setPokemons((prevPokemons) => [...prevPokemons, ...newPokemonsData]);
   };
 
