@@ -14,6 +14,7 @@ const PokemonColection: React.FC<Props> = (props) => {
   const [selectedGender, setSelectedGender] = useState<"male" | "female" | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
 
   const handlePokemonClick = (pokemon: Pokemon) => {
     setSelectedPokemon(pokemon);
@@ -49,9 +50,21 @@ const PokemonColection: React.FC<Props> = (props) => {
     pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const handleTypeToggle = (type: string) => {
+    if (selectedTypes.includes(type)) {
+      setSelectedTypes(selectedTypes.filter((t) => t !== type));
+    } else {
+      setSelectedTypes([...selectedTypes, type]);
+    }
+  };
+  
+  const filteredPokemonsByType = filteredPokemons.filter((pokemon) =>
+    selectedTypes.length === 0 ? true : pokemon.types.some((t) => selectedTypes.includes(t.type.name))
+  );
+
   return (
     <>
-    <div className="search-bar">
+      <div className="search-bar">
         <input
           id="textbar"
           type="text"
@@ -78,8 +91,24 @@ const PokemonColection: React.FC<Props> = (props) => {
           </div>
         )}
       </div>
+
+      <div className="type-filter">
+        <label>Filtrer par type :</label>
+        <br></br>
+        {["fire", "water", "grass", "electric", "normal","rock","bug","poison","fairy"].map((type) => (
+          <label key={type} className="type-checkbox">
+            <input
+              type="checkbox"
+              checked={selectedTypes.includes(type)}
+              onChange={() => handleTypeToggle(type)}
+            />
+            {type}
+          </label>
+        ))}
+      </div>
+
       <section className="collection-container">
-        {pokemons.map((pokemon) => {
+        {filteredPokemonsByType.map((pokemon) => {
           return (
             <div
               key={pokemon.id}
@@ -92,12 +121,12 @@ const PokemonColection: React.FC<Props> = (props) => {
                 id={pokemon.id}
                 image={
                   showShiny && selectedPokemon === pokemon
-                    ? selectedGender === "female"
-                    ? pokemon.sprites.front_shiny_female || pokemon.sprites.front_shiny
-                    : pokemon.sprites.front_shiny
-                    : selectedGender === "female"
-                    ? pokemon.sprites.front_female || pokemon.sprites.front_default
-                    : pokemon.sprites.front_default
+                  ? selectedGender === "female"
+                  ? pokemon.sprites.front_shiny_female || pokemon.sprites.front_shiny
+                  : pokemon.sprites.front_shiny
+                  : selectedGender === "female"
+                  ? pokemon.sprites.front_female || pokemon.sprites.front_default
+                  : pokemon.sprites.front_default
                 }
                 type={pokemon.types[0].type.name}
               />
@@ -112,8 +141,8 @@ const PokemonColection: React.FC<Props> = (props) => {
               src={
                 showShiny
                   ? selectedGender === "female"
-                  ? selectedPokemon.sprites.front_shiny_female || selectedPokemon.sprites.front_shiny
-                  : selectedPokemon.sprites.front_shiny
+                    ? selectedPokemon.sprites.front_shiny_female || selectedPokemon.sprites.front_shiny
+                    : selectedPokemon.sprites.front_shiny
                   : selectedGender === "female"
                   ? selectedPokemon.sprites.front_female || selectedPokemon.sprites.front_default
                   : selectedPokemon.sprites.front_default

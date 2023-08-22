@@ -73,6 +73,7 @@
     justify-content: center;
     align-items: center;
 }
+
 .pokemon-list-detailed {
     background-color: #f4f1de;
     position: absolute;
@@ -121,12 +122,11 @@
   text-align: center; 
 }
 
-/* Styles pour le menu deroulant */
-
+/* Styles pour le menu déroulant */
 .dropdown {
   position: absolute;
   z-index: 1;
-  max-height: 140px; /* Limite la hauteur pour n'afficher seulement 6 elements */
+  max-height: 140px; /* Limite la hauteur pour n'afficher seulement 6 éléments */
   overflow-y: auto; /* ajoute le scroll si besoin */
   background-color: white;
   border: 1px solid #ccc;
@@ -142,7 +142,15 @@
   height: 60px;
 }
 
-/* Bouton */
+/* Styles pour le filtre */
+
+.type-filter {
+  margin-top: 10px;
+}
+
+.type-checkbox {
+  margin-right: 10px;
+}
 
 button {
     cursor: pointer;

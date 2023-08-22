@@ -1,12 +1,10 @@
 import React from "react"
 
 interface Props {
-  
   name: string
   id: number
   image: string
   type: string
-  
 }
 
 function capitalizeFirstLetter(str: string): string {
@@ -26,7 +24,6 @@ function PokemonList(props: Props) {
       </section>
     </div>
   )
-  
 }
 
 export default PokemonList
