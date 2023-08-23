@@ -91,7 +91,7 @@ const PokemonColection: React.FC<Props> = (props) => {
           </div>
         )}
       </div>
-
+{/* Le filtre par différents types : */}
       <div className="type-filter">
         <label>Filtrer par type :</label>
         <br></br>
