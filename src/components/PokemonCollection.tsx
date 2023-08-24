@@ -91,7 +91,7 @@ const PokemonColection: React.FC<Props> = (props) => {
           </div>
         )}
       </div>
-{/* Le filtre par différents types : */}
+  {/* Le filtre par différents types : */}
       <div className="type-filter">
         <label>Filtrer par type :</label>
         <br></br>
@@ -107,6 +107,7 @@ const PokemonColection: React.FC<Props> = (props) => {
         ))}
       </div>
 
+  {/* Affichage des cartes : */}
       <section className="collection-container">
         {filteredPokemonsByType.map((pokemon) => {
           return (
