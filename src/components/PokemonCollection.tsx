@@ -64,6 +64,7 @@ const PokemonColection: React.FC<Props> = (props) => {
 
   return (
     <>
+      {/* Barre de recherche avec icônes + dropdown : */}
       <div className="search-bar">
         <input
           id="textbar"
