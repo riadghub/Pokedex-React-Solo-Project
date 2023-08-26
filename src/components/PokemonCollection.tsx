@@ -64,7 +64,9 @@ const PokemonColection: React.FC<Props> = (props) => {
 
   return (
     <>
+    
       {/* Barre de recherche avec icônes + dropdown : */}
+
       <div className="search-bar">
         <input
           id="textbar"
@@ -92,7 +94,9 @@ const PokemonColection: React.FC<Props> = (props) => {
           </div>
         )}
       </div>
+
   {/* Le filtre par différents types : */}
+
       <div className="type-filter">
         <label>Filtrer par type :</label>
         <br></br>
